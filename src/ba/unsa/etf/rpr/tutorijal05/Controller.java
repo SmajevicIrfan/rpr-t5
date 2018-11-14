@@ -28,7 +28,6 @@ public class Controller {
         }
     }
 
-
     public void btnNumber(ActionEvent actionEvent) {
         if (!(actionEvent.getSource() instanceof Button)) {
             throw new IllegalArgumentException("Controller only for buttons (with numbers 1-9)");
@@ -39,6 +38,12 @@ public class Controller {
             result.set(source.getText());
         } else {
             result.set(result.getValue() + source.getText());
+        }
+    }
+
+    public void dotBtn(ActionEvent actionEvent) {
+        if (!result.getValue().contains(".")) {
+            result.set(result.getValue() + ".");
         }
     }
 }
