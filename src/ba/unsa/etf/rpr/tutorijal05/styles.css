@@ -14,3 +14,11 @@ GridPane {
     -fx-padding: 0 10px;
     -fx-background-color: #B5C385;
 }
+
+#equalsBtn {
+    -fx-background-color: #DD434F;
+}
+
+#equalsBtn:hover {
+    -fx-background-color: #DD5F69;
+}
