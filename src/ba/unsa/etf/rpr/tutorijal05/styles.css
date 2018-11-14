@@ -1,0 +1,8 @@
+Button, .button {
+    -fx-max-width: 5000em;
+    -fx-max-height: 5000em;
+}
+
+GridPane {
+    -fx-padding: 5px;
+}
