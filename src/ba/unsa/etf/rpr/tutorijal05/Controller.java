@@ -9,6 +9,8 @@ public class Controller {
 
     private String previousOperand = "";
     private String operator = "";
+    
+    private boolean clearResult = true;
 
     public Controller() {
         result = new SimpleStringProperty("0");
@@ -34,8 +36,9 @@ public class Controller {
         }
         Button source = (Button) actionEvent.getSource();
 
-        if (result.getValue().equals("0")) {
+        if (clearResult) {
             result.set(source.getText());
+            clearResult = false;
         } else {
             result.set(result.getValue() + source.getText());
         }
@@ -45,5 +48,54 @@ public class Controller {
         if (!result.getValue().contains(".")) {
             result.set(result.getValue() + ".");
         }
+    }
+
+    public void btnOperator(ActionEvent actionEvent) {
+        if (!(actionEvent.getSource() instanceof Button)) {
+            throw new IllegalArgumentException("Controller only for buttons (with numbers 1-9)");
+        }
+
+        Button source = (Button) actionEvent.getSource();
+
+        setNewResult();
+        operator = source.getText();
+    }
+
+    public void btnEquals(ActionEvent actionEvent) {
+        setNewResult();
+        operator = "";
+        clearResult = true;
+    }
+
+    public void setNewResult() {
+        if (operator.equals("") || previousOperand.equals("") || clearResult) {
+            previousOperand = result.getValue();
+            return;
+        }
+
+        clearResult = true;
+        if (operator.equals("+")) {
+            result.set(
+                    Double.toString(Double.parseDouble(previousOperand) + Double.parseDouble(result.getValue()))
+            );
+        } else if (operator.equals("-")) {
+            result.set(
+                    Double.toString(Double.parseDouble(previousOperand) + Double.parseDouble(result.getValue()))
+            );
+        } else if (operator.equals("x")) {
+            result.set(
+                    Double.toString(Double.parseDouble(previousOperand) * Double.parseDouble(result.getValue()))
+            );
+        } else if (operator.equals("/")) {
+            result.set(
+                    Double.toString(Double.parseDouble(previousOperand) / Double.parseDouble(result.getValue()))
+            );
+        } else if (operator.equals("%")) {
+            result.set(
+                    Double.toString(Double.parseDouble(previousOperand) % Double.parseDouble(result.getValue()))
+            );
+        }
+
+        previousOperand = result.getValue();
     }
 }

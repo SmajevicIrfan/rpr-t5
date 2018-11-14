@@ -36,7 +36,15 @@
        <Button fx:id="btn8" mnemonicParsing="false" onAction="#btnNumber" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2" />
        <Button fx:id="btn9" mnemonicParsing="false" onAction="#btnNumber" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2" />
 
-       <Button fx:id="dotBtn" mnemonicParsing="false" text="." onAction="#dotBtn" GridPane.rowIndex="5" GridPane.columnIndex="2" />
+       <Button fx:id="dotBtn" mnemonicParsing="false" onAction="#dotBtn" text="." GridPane.columnIndex="2" GridPane.rowIndex="5" />
+
+       <Button fx:id="plusBtn" mnemonicParsing="false" onAction="#btnOperator" text="+" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.rowSpan="2" />
+       <Button fx:id="minusBtn" mnemonicParsing="false" onAction="#btnOperator" text="-" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+       <Button fx:id="timesBtn" mnemonicParsing="false" onAction="#btnOperator" text="x" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+       <Button fx:id="divideBtn" mnemonicParsing="false" onAction="#btnOperator" text="/" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+       <Button fx:id="moduloBtn" mnemonicParsing="false" onAction="#btnOperator" text="\%" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+
+       <Button fx:id="equalsBtn" mnemonicParsing="false" onAction="#btnEquals" text="=" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.rowSpan="2" />
 
    </children>
     <stylesheets>
