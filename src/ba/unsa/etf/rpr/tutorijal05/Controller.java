@@ -67,9 +67,10 @@ public class Controller {
         clearResult = true;
     }
 
-    public void setNewResult() {
+    private void setNewResult() {
         if (operator.equals("") || previousOperand.equals("") || clearResult) {
             previousOperand = result.getValue();
+            clearResult = true;
             return;
         }
 
