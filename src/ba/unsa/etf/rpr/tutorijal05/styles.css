@@ -6,3 +6,11 @@ Button, .button {
 GridPane {
     -fx-padding: 5px;
 }
+
+#display {
+    -fx-max-width: 5000em;
+    -fx-max-height: 5000em;
+
+    -fx-padding: 0 10px;
+    -fx-background-color: #B5C385;
+}
