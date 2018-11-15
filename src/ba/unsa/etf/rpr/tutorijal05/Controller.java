@@ -11,6 +11,7 @@ public class Controller {
     private String operator = "";
     
     private boolean clearResult = true;
+    private boolean unresolvedError = false;
 
     public Controller() {
         result = new SimpleStringProperty("0");
@@ -25,7 +26,11 @@ public class Controller {
     }
 
     public void btn0(ActionEvent actionEvent) {
-        if (!result.getValue().equals("0")) {
+        if (clearResult) {
+            result.set("0");
+            clearResult = false;
+            unresolvedError = false;
+        } else if (!result.getValue().equals("0")) {
             result.set(result.getValue() + "0");
         }
     }
@@ -39,6 +44,7 @@ public class Controller {
         if (clearResult) {
             result.set(source.getText());
             clearResult = false;
+            unresolvedError = false;
         } else {
             result.set(result.getValue() + source.getText());
         }
@@ -47,6 +53,7 @@ public class Controller {
     public void dotBtn(ActionEvent actionEvent) {
         if (!result.getValue().contains(".")) {
             result.set(result.getValue() + ".");
+            unresolvedError = false;
         }
     }
 
@@ -64,39 +71,56 @@ public class Controller {
     public void btnEquals(ActionEvent actionEvent) {
         setNewResult();
         operator = "";
-        clearResult = true;
     }
 
     private void setNewResult() {
-        if (operator.equals("") || previousOperand.equals("") || clearResult) {
-            previousOperand = result.getValue();
-            clearResult = true;
+        if (unresolvedError) {
             return;
         }
 
-        clearResult = true;
-        if (operator.equals("+")) {
+        if (operator.equals("") || previousOperand.equals("") || clearResult) {
+            operator = "";
+        } else if (operator.equals("+")) {
             result.set(
                     Double.toString(Double.parseDouble(previousOperand) + Double.parseDouble(result.getValue()))
             );
         } else if (operator.equals("-")) {
             result.set(
-                    Double.toString(Double.parseDouble(previousOperand) + Double.parseDouble(result.getValue()))
+                    Double.toString(Double.parseDouble(previousOperand) - Double.parseDouble(result.getValue()))
             );
         } else if (operator.equals("x")) {
             result.set(
                     Double.toString(Double.parseDouble(previousOperand) * Double.parseDouble(result.getValue()))
             );
         } else if (operator.equals("/")) {
+            if (result.getValue().equals("0")) {
+                result.set("Division by zero not supported");
+                previousOperand = "";
+                operator = "";
+                clearResult = true;
+                unresolvedError = true;
+                return;
+            }
+
             result.set(
                     Double.toString(Double.parseDouble(previousOperand) / Double.parseDouble(result.getValue()))
             );
         } else if (operator.equals("%")) {
+            if (result.getValue().equals("0")) {
+                result.set("Division by zero not supported");
+                previousOperand = "";
+                operator = "";
+                clearResult = true;
+                unresolvedError = true;
+                return;
+            }
+
             result.set(
                     Double.toString(Double.parseDouble(previousOperand) % Double.parseDouble(result.getValue()))
             );
         }
 
+        clearResult = true;
         previousOperand = result.getValue();
     }
 }
