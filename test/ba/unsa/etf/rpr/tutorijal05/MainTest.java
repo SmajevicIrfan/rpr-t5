@@ -106,4 +106,72 @@ class MainTest {
         robot.clickOn("#btn0");
         assertEquals("10", display.getText());
     }
+
+    @Test
+    void multipleAdds(FxRobot robot) {
+        display = robot.lookup("#display").queryAs(Label.class);
+        robot.clickOn("#btn2");
+        robot.clickOn("#plusBtn");
+        robot.clickOn("#btn2");
+        robot.clickOn("#plusBtn");
+        robot.clickOn("#btn2");
+        robot.clickOn("#plusBtn");
+        robot.clickOn("#btn2");
+        robot.clickOn("#plusBtn");
+        assertEquals("8.0", display.getText());
+    }
+
+    @Test
+    void consecutiveMinus(FxRobot robot) {
+        display = robot.lookup("#display").queryAs(Label.class);
+        robot.clickOn("#btn2");
+        robot.clickOn("#minusBtn");
+        robot.clickOn("#minusBtn");
+        robot.clickOn("#minusBtn");
+        robot.clickOn("#minusBtn");
+        robot.clickOn("#minusBtn");
+        robot.clickOn("#minusBtn");
+        robot.clickOn("#btn3");
+        robot.clickOn("#equalsBtn");
+        assertEquals("-1.0", display.getText());
+    }
+
+    @Test
+    void moduloByZero(FxRobot robot) {
+        display = robot.lookup("#display").queryAs(Label.class);
+        robot.clickOn("#btn2");
+        robot.clickOn("#moduloBtn");
+        robot.clickOn("#btn0");
+        robot.clickOn("#equalsBtn");
+        assertEquals("Division by zero not supported", display.getText());
+    }
+
+    @Test
+    void calculateAfterEquals(FxRobot robot) {
+        display = robot.lookup("#display").queryAs(Label.class);
+        robot.clickOn("#btn2");
+        robot.clickOn("#plusBtn");
+        robot.clickOn("#btn2");
+        robot.clickOn("#equalsBtn");
+        robot.clickOn("#plusBtn");
+        robot.clickOn("#btn2");
+        robot.clickOn("#equalsBtn");
+        robot.clickOn("#plusBtn");
+        robot.clickOn("#btn2");
+        robot.clickOn("#equalsBtn");
+        assertEquals("8.0", display.getText());
+    }
+
+    @Test
+    void resetAfterEquals(FxRobot robot) {
+        display = robot.lookup("#display").queryAs(Label.class);
+        robot.clickOn("#btn2");
+        robot.clickOn("#plusBtn");
+        robot.clickOn("#btn2");
+        robot.clickOn("#equalsBtn");
+        robot.clickOn("#btn1");
+        robot.clickOn("#btn2");
+        robot.clickOn("#btn3");
+        assertEquals("123", display.getText());
+    }
 }
