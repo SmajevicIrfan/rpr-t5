@@ -93,27 +93,13 @@ public class Controller {
                     Double.toString(Double.parseDouble(previousOperand) * Double.parseDouble(result.getValue()))
             );
         } else if (operator.equals("/")) {
-            if (result.getValue().equals("0")) {
-                result.set("Division by zero not supported");
-                previousOperand = "";
-                operator = "";
-                clearResult = true;
-                unresolvedError = true;
-                return;
-            }
+            if (isDividingByZero()) return;
 
             result.set(
                     Double.toString(Double.parseDouble(previousOperand) / Double.parseDouble(result.getValue()))
             );
         } else if (operator.equals("%")) {
-            if (result.getValue().equals("0")) {
-                result.set("Division by zero not supported");
-                previousOperand = "";
-                operator = "";
-                clearResult = true;
-                unresolvedError = true;
-                return;
-            }
+            if (isDividingByZero()) return;
 
             result.set(
                     Double.toString(Double.parseDouble(previousOperand) % Double.parseDouble(result.getValue()))
@@ -122,5 +108,17 @@ public class Controller {
 
         clearResult = true;
         previousOperand = result.getValue();
+    }
+
+    private boolean isDividingByZero() {
+        if (result.getValue().equals("0")) {
+            result.set("Division by zero not supported");
+            previousOperand = "";
+            operator = "";
+            clearResult = true;
+            unresolvedError = true;
+            return true;
+        }
+        return false;
     }
 }
