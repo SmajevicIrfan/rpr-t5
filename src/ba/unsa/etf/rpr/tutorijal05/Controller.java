@@ -5,7 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
 public class Controller {
-    private SimpleStringProperty result;
+    private final SimpleStringProperty result;
 
     private String previousOperand = "";
     private String operator = "";
@@ -25,7 +25,7 @@ public class Controller {
         return result;
     }
 
-    public void btn0(ActionEvent actionEvent) {
+    public void btn0() {
         if (clearResult) {
             result.set("0");
             clearResult = false;
@@ -41,7 +41,7 @@ public class Controller {
         }
         Button source = (Button) actionEvent.getSource();
 
-        if (clearResult) {
+        if (clearResult || result.getValue().equals("0")) {
             result.set(source.getText());
             clearResult = false;
             unresolvedError = false;
@@ -50,7 +50,7 @@ public class Controller {
         }
     }
 
-    public void dotBtn(ActionEvent actionEvent) {
+    public void dotBtn() {
         if (!result.getValue().contains(".")) {
             result.set(result.getValue() + ".");
             unresolvedError = false;
@@ -68,7 +68,7 @@ public class Controller {
         operator = source.getText();
     }
 
-    public void btnEquals(ActionEvent actionEvent) {
+    public void btnEquals() {
         setNewResult();
         operator = "";
     }

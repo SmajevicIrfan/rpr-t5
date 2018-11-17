@@ -19,7 +19,7 @@ class MainTest {
     private Label display;
 
     @Start
-    public void start (Stage stage) throws Exception {
+    void start(Stage stage) throws Exception {
         Parent mainNode = FXMLLoader.load(Main.class.getResource("digitron.fxml"));
         stage.setScene(new Scene(mainNode));
         stage.show();
@@ -27,20 +27,20 @@ class MainTest {
     }
 
     @Test
-    public void startWithZero (FxRobot robot) {
+    void startWithZero(FxRobot robot) {
         display = robot.lookup("#display").queryAs(Label.class);
         assertEquals("0", display.getText());
     }
 
     @Test
-    public void numberOne (FxRobot robot) {
+    void numberOne(FxRobot robot) {
         display = robot.lookup("#display").queryAs(Label.class);
         robot.clickOn("#btn1");
         assertEquals("1", display.getText());
     }
 
     @Test
-    public void number123 (FxRobot robot) {
+    void number123(FxRobot robot) {
         display = robot.lookup("#display").queryAs(Label.class);
         robot.clickOn("#btn1");
         robot.clickOn("#btn2");
@@ -49,7 +49,7 @@ class MainTest {
     }
 
     @Test
-    public void number123Plus456 (FxRobot robot) {
+    void number123Plus456(FxRobot robot) {
         display = robot.lookup("#display").queryAs(Label.class);
         robot.clickOn("#btn1");
         robot.clickOn("#btn2");
@@ -62,7 +62,7 @@ class MainTest {
     }
 
     @Test
-    public void number123Plus456Equals (FxRobot robot) {
+    void number123Plus456Equals(FxRobot robot) {
         display = robot.lookup("#display").queryAs(Label.class);
         robot.clickOn("#btn1");
         robot.clickOn("#btn2");
@@ -76,7 +76,7 @@ class MainTest {
     }
 
     @Test
-    public void dotBtn (FxRobot robot) {
+    void dotBtn(FxRobot robot) {
         display = robot.lookup("#display").queryAs(Label.class);
         robot.clickOn("#btn8");
         robot.clickOn("#btn8");
@@ -90,7 +90,7 @@ class MainTest {
     }
 
     @Test
-    public void zeroBtn (FxRobot robot) {
+    void zeroBtn(FxRobot robot) {
         display = robot.lookup("#display").queryAs(Label.class);
         robot.clickOn("#btn0");
         robot.clickOn("#btn0");
@@ -98,7 +98,7 @@ class MainTest {
     }
 
     @Test
-    public void zeroBtn2 (FxRobot robot) {
+    void zeroBtn2(FxRobot robot) {
         display = robot.lookup("#display").queryAs(Label.class);
         robot.clickOn("#btn0");
         robot.clickOn("#btn0");
